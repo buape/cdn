@@ -3,7 +3,7 @@ name = "cdn"
 main = "src/index.ts"
 compatibility_date = "2023-05-04"
 send_metrics = false
-account_id = "7b295e242c36fa2ab689fa91b5c70e59"
+account_id = "cb8680c9bbcf0c359fccbb5e634df935"
 
 [[r2_buckets]]
 # This is the bucket (storage space) that will be used to store the files that are uploaded to the CDN

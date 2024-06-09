@@ -45,7 +45,7 @@ app.post("/upload", auth(), async (c) => {
 
     let filename;
     if (slug) {
-        filename = slug
+        filename = decodeURIComponent(slug as string);
     } else {
         filename = nanoid(idLength(c.req.header("Name-Length"), 8));
     }
