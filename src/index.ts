@@ -73,8 +73,9 @@ app.post("/upload", auth(), async (c) => {
     });
 });
 
-app.delete("/:key", auth(), async (c) => {
-    const key = c.req.param("key");
+app.delete("/*", auth(), async (c) => {
+    const encodedKey = c.req.path.slice(1);
+    const key = decodeURIComponent(encodedKey);
 
     const object = await c.env.CDN_BUCKET.get(key);
     if (!object) {
@@ -85,7 +86,7 @@ app.delete("/:key", auth(), async (c) => {
         return c.json({ success: false, error: err.toString() }, 500);
     });
 
-    return c.json({ success: true, name: `${key} has been deleted from the storage bucket, bear in mind that it may take a few minutes for the CDN to update.` });
+    return c.json({ success: true, name: `${key} has been deleted from the storage bucket, bear in mind that it may take a few minutes for the CDN's cache to expire.` });
 });
 
 app.onError((error, c) => {
